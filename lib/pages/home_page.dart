@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:qr_reader/pages/direcciones_page.dart';
 import 'package:qr_reader/pages/mapas_page.dart';
 
+
+import 'package:qr_reader/providers/db_provider.dart';
 import 'package:qr_reader/providers/ui_provider.dart';
 
 
@@ -46,6 +48,12 @@ class _HomePageBody extends StatelessWidget {
     //Cambiar para mostrar la pagina respectiva
 
     final currentIndex = uiProvider.selectedMenuOpt;
+
+    //TODO: Temporal leer la base de datos
+    //final tempScan = new ScanModel(valor: 'http://google.com');
+    DBProvider.db.deleteAllScans().then(print); 
+    
+
     switch( currentIndex ){
       case 0:
         return MapasPage();
