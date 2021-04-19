@@ -6,6 +6,7 @@ import 'package:qr_reader/pages/mapas_page.dart';
 
 
 import 'package:qr_reader/providers/db_provider.dart';
+import 'package:qr_reader/providers/scan_list_provider.dart';
 import 'package:qr_reader/providers/ui_provider.dart';
 
 
@@ -49,15 +50,16 @@ class _HomePageBody extends StatelessWidget {
 
     final currentIndex = uiProvider.selectedMenuOpt;
 
-    //TODO: Temporal leer la base de datos
-    //final tempScan = new ScanModel(valor: 'http://google.com');
-    DBProvider.db.deleteAllScans().then(print); 
+    //Usar el ScanListProvider
+    final scanListProvider = Provider.of<ScanListProvider>(context, listen: false);
     
 
     switch( currentIndex ){
       case 0:
+        scanListProvider.cargarScanPorTipo('geo');
         return MapasPage();
       case 1:
+        scanListProvider.cargarScanPorTipo('http');
         return DireccionesPage();
       default:
         return MapasPage();
